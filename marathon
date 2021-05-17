@@ -1,0 +1,28 @@
+function marathon(participant, completion) {
+    var array = [];
+    var newarray = [];
+    var answer = '';
+    var newarrayToString = ''; 
+    
+    for(var i in participant) {
+        for(var j in completion) {
+            if(completion[j] === participant[i]) {
+            array.push(completion[j]);
+            } else {
+            answer = participant[j];
+            }
+        }
+    }
+    
+    function removeDuplicates(data) {
+        return [...new Set(data)];
+    }
+    
+    newarray.push(removeDuplicates(array));
+    newarrayToString = newarray.toString();
+    console.log('Completion : ' + newarrayToString);
+    
+    return answer;
+}
+
+console.log(marathon(["nikola", "nikola", "kiki", "kiki", "eden", "eden"], ["kiki", "eden"]));
