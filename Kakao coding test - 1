@@ -1,0 +1,21 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        int[] map1 = { 9,20,28,18,11 };
+        int[] map2 = { 30,1,21,17,28 };
+        for( int i=0; i<=4; i++ ) {
+            int intValue = map1[ i ] | map2[ i ];
+            String binaryString = Integer.toBinaryString( intValue );
+            if ( binaryString.equals( "11111" ) )
+                binaryString = "#####";
+            if ( binaryString.equals( "10101" ) )
+                binaryString = "# # #";
+            if ( binaryString.equals( "11101" ) )
+                binaryString = "### #";
+            if ( binaryString.equals( "10011" ) )
+                binaryString = "#  ##";
+            System.out.println( binaryString );
+        }
+    }
+}
