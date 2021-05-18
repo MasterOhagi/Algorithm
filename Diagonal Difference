@@ -1,0 +1,81 @@
+// https://www.hackerrank.com/challenges/diagonal-difference/problem?h_r=next-challenge&h_v=zen
+
+'use strict';
+
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
+}
+
+/*
+ * Complete the 'diagonalDifference' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts 2D_INTEGER_ARRAY arr as parameter.
+ */
+
+function diagonalDifference(arr) {
+    // Write your code here
+    // var answer = 0;
+    // var answer1 = 0;
+    // var answer2 = 0;
+    
+    // answer1 = arr[0][0] + arr[1][1] + arr[2][2];
+    // answer2 = arr[0][2] + arr[1][1] + arr[2][0]
+    // answer =  answer2 - answer1;
+    
+    // return answer;
+    let diag1 = 0;
+    let diag2 = 0;
+    const len = arr.length;
+    console.log('Len : ' + len);
+    // The forEach() method executes a provided function once for each array element.
+    arr.forEach((out) => {
+        console.log('out : ' + out);
+    })
+    arr.forEach((ele, ind) => {
+        console.log('ele[ind] : ' + ele[ind]);
+        console.log('ind : ' + ind);
+        //console.log('ele[len - 1 - ind] : ' + ele[len - 1 - ind]);
+        //console.log(len - 1 - ind);
+        diag1 += ele[ind];
+        diag2 += ele[len - 1 - ind];
+    })
+    // The Math.abs() function returns the absolute value of a number.
+    return Math.abs(diag1-diag2);
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const n = parseInt(readLine().trim(), 10);
+
+    let arr = Array(n);
+
+    for (let i = 0; i < n; i++) {
+        arr[i] = readLine().replace(/\s+$/g, '').split(' ').map(arrTemp => parseInt(arrTemp, 10));
+    }
+
+    const result = diagonalDifference(arr);
+
+    ws.write(result + '\n');
+
+    ws.end();
+}
