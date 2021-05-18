@@ -27,4 +27,20 @@ function marathon(participant, completion) {
     return answer;
 }
 
-console.log(marathon(["nikola", "nikola", "kiki", "kiki", "eden", "eden"], ["kiki", "eden"]));
+function solution(participant, completion) {
+    var answer = '';
+
+    participant.sort()
+    completion.sort()
+    
+    for(let i in participant){
+        if(participant[i]!==completion[i]){
+        answer = participant[i];
+        break;
+        }
+    }
+
+    return answer;
+}
+
+console.log(solution(["nikola", "nikola", "kiki", "kiki", "eden", "eden"], ["kiki", "eden"]));
