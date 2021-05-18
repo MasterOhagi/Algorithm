@@ -1,46 +1,31 @@
 // https://programmers.co.kr/learn/courses/30/lessons/42576?language=javascript
 
-function marathon(participant, completion) {
-    var array = [];
-    var newarray = [];
-    var answer = '';
-    var newarrayToString = ''; 
-    
-    for(var i in participant) {
-        for(var j in completion) {
-            if(completion[j] === participant[i]) {
-            array.push(completion[j]);
-            } else {
-            answer = participant[j];
-            }
-        }
-    }
-    
-    function removeDuplicates(data) {
-        return [...new Set(data)];
-    }
-    
-    newarray.push(removeDuplicates(array));
-    newarrayToString = newarray.toString();
-    console.log('Completion : ' + newarrayToString);
-    
-    return answer;
-}
-
+// this function do first sort the two array, and compare between array.
+// and if the array is do not exist that right place then return the participant value.
 function solution(participant, completion) {
-    var answer = '';
-
-    participant.sort()
-    completion.sort()
+  var answer = '';
+  var count = 0;
+  
+  participant.sort()
+  completion.sort()
+  console.log(participant);
+  console.log(completion);
+  
+  for(let i in participant){
+      console.log('i : ' + i); // length of participant
+      count++;
+    if(participant[i]!==completion[i]){ 
+        // if participant is do not exist in completion variable, then return the participant.
+        console.log('par : ' + participant[i]);
+        console.log('com : ' + completion[i]);
+      answer = participant[i];
     
-    for(let i in participant){
-        if(participant[i]!==completion[i]){
-        answer = participant[i];
-        break;
-        }
+      console.log('count : ' + count);
+      break;
     }
+  }
 
-    return answer;
+  return answer;
 }
 
-console.log(solution(["nikola", "nikola", "kiki", "kiki", "eden", "eden"], ["kiki", "eden"]));
+console.log(solution(["mislav", "stanko", "mislav", "ana"], ["stanko", "mislav", "mislav"]));
