@@ -1,0 +1,102 @@
+import java.util.*;
+
+// https://programmers.co.kr/learn/courses/30/lessons/42577?language=java
+
+public class Main {
+    
+    public static void main(String[] args) throws Exception {
+        Solution s = new Solution();
+        
+        String[][] array = {
+            {"119", "97674223", "1195524421"}
+            ,{"123","456","789"}
+            ,{"12","123","1235","567","88"}
+        };
+        
+        for(String[] out : array) {
+            System.out.println(s.solution(out));
+        }
+        
+        //s.hashMapTestMethod();
+        //String testvalue = "11111";
+        //System.out.println("testvalue length : " + testvalue.substring(0, 2));
+        
+        //s.hashMapContainsKeyTestMethod();
+    }
+}
+
+class Solution {
+    
+    boolean solution(String[] phone_book) {
+            HashMap<String, Integer> hashMap = new HashMap<>();
+            // input phone_book array value to number variable.
+            // first "119"
+            // second "97674223"
+            // third "1195524421"
+            for (String number : phone_book) hashMap.put(number, 0);
+            //System.out.println("hashMap : " + hashMap);
+            //System.out.println("hashMap keySet : " + hashMap.keySet());
+            // keySet() HashMap method is return that all key.
+            // get from hashMap.keySet() set to key.
+                // that first key is "97674223".
+                // that length is 8. -1 => 7
+                // j is increment from 1 to 7.
+                // if hashMap contain key that key.substring(0, j)) value then return false. if not contain then return true.
+            for (String key : hashMap.keySet())
+                for (int j = 1; j <= key.length() - 1; j++)
+                    if (hashMap.containsKey(key.substring(0, j))) return false;
+            return true;
+    }
+    
+    void hashMapTestMethod() {
+        // Create an empty hash map
+        // HashMap<K, V>. Which mean is <Key, Value>
+        // Below example that mean is the key is String and the value is Integer.
+        HashMap<String, Integer> map = new HashMap<>();
+  
+        // Add elements to the map
+        map.put("vishal", 10);
+        map.put("sachin", 30);
+        map.put("vaibhav", 20);
+        map.put("test", 40);
+        map.put("abcd", 50);
+  
+        // Print size and content
+        System.out.println("Size of map is : "
+                           + map.size());
+        System.out.println(map);
+  
+        // Check if a key is present and if
+        // present, print value
+        if (map.containsKey("vishal")) {
+            Integer a = map.get("vishal"); // a == 10;
+            System.out.println("value for key"
+                               + " \"vishal\" is : " + a);
+        }
+    }
+    
+    // containsKey method is return the boolean value.
+    void hashMapContainsKeyTestMethod() {
+            // Creating an empty HashMap
+        HashMap<Integer, String> hash_map = new HashMap<Integer, String>();
+  
+        // Mapping string values to int keys
+        hash_map.put(10, "Geeks");
+        hash_map.put(15, "4");
+        hash_map.put(20, "Geeks");
+        hash_map.put(25, "Welcomes");
+        hash_map.put(30, "You");
+  
+        // Displaying the HashMap
+        System.out.println("Initial Mappings are: " + hash_map);
+  
+        // Checking for the key_element '20'
+        System.out.println("Is the key '20' present? " + 
+        hash_map.containsKey(20));
+  
+        // Checking for the key_element '5'
+        System.out.println("Is the key '5' present? " + 
+        hash_map.containsKey(5));
+    }
+    
+}
