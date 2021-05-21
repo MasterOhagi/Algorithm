@@ -33,14 +33,22 @@ function readLine() {
 
 function larrysArray(a) {
     // Write your code here
-
+    //console.log(a);
+    
     return a.reduce((inversions, a_i, i) => {
+        console.log("First Inversions : " + inversions);
+        console.log("First a_i : " + a_i);
+        console.log("i : " + i);
+        console.log("a.length : " + a.length);
         for(let j = i + 1; j < a.length; j++) {
+            console.log("a[j] : " + a[j]);
+            console.log("a_1 : " + a_i);
             if(a[j] < a_i) inversions++;
         }
+        console.log("Inversions : " + inversions);
         return inversions;
-    }, 0) % 2 ? 'NO' : 'YES';
-        
+    }, 0) % 2 ? 'NO' : 'YES';    
+
 }
 
 function main() {
@@ -60,3 +68,66 @@ function main() {
 
     ws.end();
 }
+
+###############################################################################################
+
+Value : 3, 1, 2
+Inversions : 0
+
+First Inversions : 0
+First a_i : 3
+i : 0
+a.length : 3
+----->
+a[j] : 1
+a_1 : 3
+a[j] : 2
+a_1 : 3
+Inversions : 2
+#######################
+First Inversions : 2
+First a_i : 1
+i : 1
+a.length : 3
+----->
+a[j] : 2
+a_1 : 1
+Inversions : 2
+#######################
+First Inversions : 2
+First a_i : 2
+i : 2
+a.length : 3
+----->
+Inversions : 2
+
+*첫번째의 값이 두번째의 값보다 클때, Inversions를 증감시킨다.
+
+*첫번째의 값이 세번째의 값보다 클때, Inversions를 증감시킨다.
+
+*First a_1의 값에는 각각의 배열이 순차적으로 들어오고 있다.
+
+*i의 값은 인덱스의 크기만큼 증가하고 있다. 0~2까지 증가한다.
+
+*Inversions를 % 2 로 나눠 떨어진 값이 0일 경우 YES를, 그렇지 않을 경우 NO를 Return 하고 있다.
+
+// First : j = 0 + 1; j < 3; j ++;
+	// j == 1;
+	-> True : if (a[j] < a_1) inversions++;
+		// a[j] value : 1
+		// a_1 value : 3 // [ 3 ] is First value
+// Second : j = 1 + 1; j < 3; j ++;
+	// j == 2;
+	-> True : if (a[j] < a_1) inversions++;
+		// a[j] : 2
+		// a_1 : 3 // [ 3 ] is First value
+		// Loop End. Inversions value is [ 2 ].
+============================================================
+// First : j = 1 + 1; j < 3; j ++;
+	// j == 2;
+	-> True : if (a[j] < a_1) inversions++;
+		// a[2] value : 2
+		// a_1 value : 1 ==> False;
+============================================================
+// First : j = 2 + 1; j < 3; j ++;
+	// j == 3; ==> Loop end
