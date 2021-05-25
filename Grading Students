@@ -1,0 +1,71 @@
+// https://www.hackerrank.com/challenges/grading/problem
+
+'use strict';
+
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
+}
+
+/*
+ * Complete the 'gradingStudents' function below.
+ *
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts INTEGER_ARRAY grades as parameter.
+ */
+
+function gradingStudents(grades) {
+    // Write your code here
+    
+    return grades.map((n) => {
+        console.log("N : " + n);
+        // If assume that input value is 73. then first execute (n%5) formal. then the value will be 3. next, calculate remain value with use substraction with 5.
+        let diff = 5 - (n % 5);
+        console.log("Diff : " + diff);
+        
+        // Is the value is bigger than 3? and Is the current array value is bigger than or equals with 38? 
+        if(diff < 3 && n >= 38) {
+            // If above term is true, then addtion from diff variable value to n variable value.
+            n += diff;
+        }
+        
+        return n;
+    })
+
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const gradesCount = parseInt(readLine().trim(), 10);
+
+    let grades = [];
+
+    for (let i = 0; i < gradesCount; i++) {
+        const gradesItem = parseInt(readLine().trim(), 10);
+        grades.push(gradesItem);
+    }
+
+    const result = gradingStudents(grades);
+
+    ws.write(result.join('\n') + '\n');
+
+    ws.end();
+}
