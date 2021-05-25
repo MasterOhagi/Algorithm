@@ -32,23 +32,22 @@ function readLine() {
  */
 
 function larrysArray(a) {
-    // Write your code here
-    //console.log(a);
-    
-    return a.reduce((inversions, a_i, i) => {
-        console.log("First Inversions : " + inversions);
-        console.log("First a_i : " + a_i);
-        console.log("i : " + i);
-        console.log("a.length : " + a.length);
-        for(let j = i + 1; j < a.length; j++) {
-            console.log("a[j] : " + a[j]);
-            console.log("a_1 : " + a_i);
-            if(a[j] < a_i) inversions++;
+    let initialValue = 0;
+    return a.reduce((accumulator, currentValue, index) => {
+        //console.log("First accumulator : " + accumulator);
+        //console.log("First currentValue : " + currentValue);
+        //console.log("First index : " + index);
+        for(let j = index + 1; j < a.length; j++) {
+            console.log("J : " + j);
+            if(a[j] < currentValue) {
+                accumulator++;
+                console.log("a[j] : " + a[j]);
+                console.log("a_i is bigger than a[j] : " + currentValue);
+                }
         }
-        console.log("Inversions : " + inversions);
-        return inversions;
-    }, 0) % 2 ? 'NO' : 'YES';    
-
+        console.log("accumulator : " + accumulator);
+        return accumulator;
+    }, initialValue) % 2 ? 'NO' : 'YES';    
 }
 
 function main() {
