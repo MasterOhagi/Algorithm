@@ -1,0 +1,112 @@
+// https://www.hackerrank.com/challenges/climbing-the-leaderboard/problem
+
+*
+# I have to inject the player array to ranked array.
+# First I have to count each value in ranked array.
+# If the value is same, then give same count of number.
+# now inject from the player value to the ranked array.
+# If the player value is smaller than inner ranked value, then the player value is placed on the back of inner ranked value.
+*/
+
+/*
+- What the function do inside?
+	- Make new "positions" variable with type of array.
+	- Make new "distScore" variable for remove duplicates in The scores array and inject new value to the array.
+	- Make new "aliceIndex" variable for get score of alice(A alice is indicate the player).
+	- Make new "i" variable that store a value which "distScore.length - 1".
+	- Execute forEach syntax to The array of Alice.
+	- that above forEach syntax has are one parameter which "element".
+	- that above forEach syntax execute while syntax when the "i" variable is equals or greater than 0. 
+	- this while syntax is include if/else syntax.
+	- when if the "element" variable value is equals or greater than "distScore[i]" variable value then decrease the "i"variable value. 
+	- else push a value that "i + 2" to the array of "positions". and then break the loop syntax.
+	- when this process is all over, if the "i" variable value is smaller than 0, then push "1" to array of "positions".
+	- and last, return the Array of "positions".
+*/
+
+'use strict';
+
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
+}
+
+/*
+ * Complete the 'climbingLeaderboard' function below.
+ *
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts following parameters:
+ *  1. INTEGER_ARRAY ranked
+ *  2. INTEGER_ARRAY player
+ */
+
+function climbingLeaderboard(scores, alice) {
+    console.log("Scores : " + scores);
+    console.log("alice : " + alice);
+    let positions = [];
+    // Remove duplication and inject new array value to distScore valiable.
+    let distScore = [...new Set(scores)];
+    console.log("DistScore : " + distScore);
+    let aliceIndex = 0;
+    let i = distScore.length - 1;
+    
+    alice.forEach(element => {
+        console.log("Element : " + element);
+        while (i >= 0) {
+            console.log("i : " + i);
+            // First, is 5 is greater than 10? ==> False;
+            if (element >= distScore[i]) {
+                console.log("Current element : " + element);
+                console.log("Current distScore[i] : " + distScore[i]);
+                i--;
+            } else {
+                console.log("Second element : " + element);
+                console.log("Second distScore[i] : " + distScore[i]);
+                let test = i+2;
+                console.log("Test : " + test);
+                positions.push(i + 2);
+                console.log("Positions : " + positions);
+                break;
+            }
+        }
+        if (i < 0) positions.push(1);
+
+    });
+
+    return positions;
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const rankedCount = parseInt(readLine().trim(), 10);
+
+    const ranked = readLine().replace(/\s+$/g, '').split(' ').map(rankedTemp => parseInt(rankedTemp, 10));
+
+    const playerCount = parseInt(readLine().trim(), 10);
+
+    const player = readLine().replace(/\s+$/g, '').split(' ').map(playerTemp => parseInt(playerTemp, 10));
+
+    const result = climbingLeaderboard(ranked, player);
+
+    ws.write(result.join('\n') + '\n');
+
+    ws.end();
+}
