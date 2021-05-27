@@ -1,0 +1,14 @@
+// https://www.hackerrank.com/challenges/cut-the-sticks/problem
+
+function cutTheSticks(a) {
+    a.sort();
+    var min = a[0];
+    console.log(a.length);
+
+    for (var i=0; i<a.length; i++) {
+        if (a[i] > min) {
+            min = a[i];
+        console.log(a.length - i);
+        }
+    }
+}
