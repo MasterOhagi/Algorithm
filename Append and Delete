@@ -34,12 +34,35 @@ function readLine() {
  *  3. INTEGER k
  */
 
-function appendAndDelete (s, t, k) {
+function appendAndDelete(s, t, k) {
     let o = s.length + t.length
-    if (k > o) return 'Yes'
-    for (let i = 0, l = Math.min(s.length, t.length); i < l; i++, o -= 2) {
+    console.log("s.length : " + s.length); // basic The alphabet.
+    console.log("t.length : " + t.length); // change to this alphabet.
+    console.log("o : " + o);
+    console.log("k : " + k); // The count of change to make from s to t.
+    console.log("s : " + s);
+    console.log("t : " + t);
+    
+    // If the k(k mean is explained that above.) is greater than o(the sum of s and t.)
+    // Because if this is true, they has enough to change of count of the word.
+    if (k > o) return 'Yes' 
+    
+    // Make two variable which i, l. l is gave most smaller value between s.length, t.length. The i is increment from i to l.
+    let i = 0,
+    l = Math.min(s.length, t.length);
+    console.log("l : " + l);
+    // this [for] syntax do that compare s and t. if this two value is same, then decrement [O] value which sum of s and t.
+    // reason for decrement [O] value is because s(1) and t(1) sum value is two.
+    for (i,l; i < l; i++, o -= 2) {
+        console.log("o : " + o);
+        console.log("s[i] : " + s[i]);
+        console.log("t[i] : " + t[i]);
+        console.log("#####");
+        // First, Compare between s and t value and then if do not match with two value then break the Loop.
         if (s[i] !== t[i]) break
     }
+    // The [O] is the number of has to change.
+    // The [K] is the number of can change.
     return o > k || (k - o) % 2 !== 0 ? 'No' : 'Yes'
 }
 
