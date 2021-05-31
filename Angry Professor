@@ -35,6 +35,8 @@ function readLine() {
 
 function angryProfessor(threshold, students) {
     // Write your code here
+    
+    /*
     let arrivaltimes = 0;
     
     students.forEach(student => {
@@ -46,6 +48,10 @@ function angryProfessor(threshold, students) {
     } else {
         return "NO";
     }
+    */
+    
+    let result = students.filter(student => student <= 0);
+    return result.length >= threshold ? 'NO' : 'YES';
     
 }
 
