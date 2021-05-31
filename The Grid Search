@@ -1,0 +1,99 @@
+// https://www.hackerrank.com/challenges/the-grid-search/problem
+
+'use strict';
+
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
+}
+
+/*
+ * Complete the 'gridSearch' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts following parameters:
+ *  1. STRING_ARRAY G
+ *  2. STRING_ARRAY P
+ */
+
+function gridSearch(g, p) {
+    // Write your code here
+        for(let i=0;i<=(g.length-p.length);i++)
+        {
+            for(let j=0;j<=(g[0].length-p[0].length);j++)
+            {
+                let a=i;
+                let c=0;
+                if(g[i].substring(j,j+p[0].length) === p[0])
+                {
+                    c++;
+                    for(let k=1;k<p.length;k++)
+                    {
+                        i++;   
+                        if(g[i].substring(j,j+p[0].length) === p[k]) c++;
+                        else break;
+                    }
+                    if(c==p.length) return "YES";
+                }
+                i=a;
+            }
+        }
+        return "NO";
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const t = parseInt(readLine().trim(), 10);
+
+    for (let tItr = 0; tItr < t; tItr++) {
+        const firstMultipleInput = readLine().replace(/\s+$/g, '').split(' ');
+
+        const R = parseInt(firstMultipleInput[0], 10);
+
+        const C = parseInt(firstMultipleInput[1], 10);
+
+        let G = [];
+
+        for (let i = 0; i < R; i++) {
+            const GItem = readLine();
+            G.push(GItem);
+        }
+
+        const secondMultipleInput = readLine().replace(/\s+$/g, '').split(' ');
+
+        const r = parseInt(secondMultipleInput[0], 10);
+
+        const c = parseInt(secondMultipleInput[1], 10);
+
+        let P = [];
+
+        for (let i = 0; i < r; i++) {
+            const PItem = readLine();
+            P.push(PItem);
+        }
+
+        const result = gridSearch(G, P);
+
+        ws.write(result + '\n');
+    }
+
+    ws.end();
+}
