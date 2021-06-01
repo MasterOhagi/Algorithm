@@ -1,0 +1,76 @@
+// https://www.hackerrank.com/challenges/the-time-in-words/problem
+
+'use strict';
+
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
+}
+
+/*
+ * Complete the 'timeInWords' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts following parameters:
+ *  1. INTEGER h
+ *  2. INTEGER m
+ */
+
+function timeInWords(h, m) {
+    console.log("h : " + h);
+    console.log("m : " + m);
+    
+    let st = ["one","two","three","four","five","six","seven","eigth","nine","ten","eleven","twelve"]
+    , st2 = ["one","two","three","four","five","six","seven","eigth","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty","twenty one","twenty two","twenty three","twenty four","twenty five","twenty six","twenty seven","twenty eigth","twenty nine","thirty"];
+
+    if(m>30) h=h+1;
+    let hour=st[h-1];
+    console.log("hour : " + hour);
+    
+        if(m==0) return hour+" o' clock";
+        if(m==15) return  "quarter past "+hour;
+        if(m==30) return "half past "+hour;
+        if(m==45) return "quarter to "+hour;
+        
+        if(m<30) {
+            let min=st2[m-1];
+            if(m==1) return min+" minute past "+hour;
+            return min+" minutes past "+hour;
+        }
+        if(m>30) {
+            m=60-m;
+            let min=st2[m-1];
+            return min+" minutes to "+hour;
+        }
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const h = parseInt(readLine().trim(), 10);
+
+    const m = parseInt(readLine().trim(), 10);
+
+    const result = timeInWords(h, m);
+
+    ws.write(result + '\n');
+
+    ws.end();
+}
