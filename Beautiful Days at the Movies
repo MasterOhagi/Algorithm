@@ -45,14 +45,10 @@ function beautifulDays(i, j, k) {
             sum++;
         } else if(i<reversednum) {
             divisor = reversednum - i;
-            if (divisor%k == 0) {
-                sum++;                
-            }
+            if (divisor%k == 0) sum++;   
         } else if(i>reversednum) {
             divisor = i - reversednum; 
-            if (divisor%k == 0) {
-                sum++;                
-            }
+            if (divisor%k == 0) sum++;          
         }
     }
     
