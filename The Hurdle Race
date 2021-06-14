@@ -37,12 +37,16 @@ function hurdleRace(k, height) {
     // console.log(k);
     // console.log(height);
     // console.log(Math.max(...height));
+    /*
     let answer = 0;
     
     if ( k > Math.max(...height) ) return 0;
     for( k; k<Math.max(...height); k++) answer++;
     
     return answer;
+    */
+    
+    return Math.max(0, Math.max(...height) - k);
 }
 
 function main() {
