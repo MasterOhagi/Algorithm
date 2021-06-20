@@ -1,0 +1,74 @@
+// https://www.hackerrank.com/challenges/funny-string/problem
+
+'use strict';
+
+const fs = require('fs');
+
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
+}
+
+/*
+ * Complete the 'funnyString' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts STRING s as parameter.
+ */
+
+function funnyString(s) {
+    let output = s.split('');
+    let newarray = [];
+    let getmiddleindex = 0;
+    let count = 0;
+    
+    for(let i=0; i<output.length; i++) {
+        output[i] = output[i].charCodeAt();   
+    }
+    for(let i=0; i<output.length-1; i++) {
+        newarray.push(output[i+1] - output[i]);
+    }
+    if(newarray.length % 2 === 0) return "Not Funny";
+    
+    getmiddleindex = Math.floor(newarray.length / 2);
+    
+    for(getmiddleindex; getmiddleindex<newarray.length-1; getmiddleindex++) {
+        count++;
+        if(newarray[getmiddleindex-count] !== newarray[getmiddleindex+count]) {
+            return "Not Funny";
+        }
+    }
+    
+    return "Funny";
+}
+
+function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
+    const q = parseInt(readLine().trim(), 10);
+
+    for (let qItr = 0; qItr < q; qItr++) {
+        const s = readLine();
+
+        const result = funnyString(s);
+
+        ws.write(result + '\n');
+    }
+
+    ws.end();
+}
